@@ -11,7 +11,7 @@
 #          /:/  /       \:\__\          #
 #          \/__/         \/__/          #
 #                                       #
-#            ~My Qtile Config~           #
+#           ~My Qtile Config~           #
 #             Feb. 04, 2022             #
 #                                       #
 #           Surya Manikhandan           #
@@ -34,6 +34,8 @@ from libqtile.utils import guess_terminal
 #---------------------------------------#
 black = '#000000'
 transparent = '#00000000'
+active = '#e74c3c'
+inactive= '#34495e'
 
 #---------------------------------------#
 #            BASE KEYBINDS              #
@@ -112,7 +114,7 @@ for i in groups:
 #             TILE LAYOUTS              #
 #---------------------------------------#
 layouts = [
-    layout.Columns(border_focus_stack=["#00E48B", "#000000"], border_width=4),
+    layout.Columns(border_focus=active,border_normal=inactive,border_on_single=True ,border_width=4,margin=15),
     layout.Max(),
     # layout.Stack(numm_stacks=2),
     # layout.Bsp(),
@@ -142,16 +144,16 @@ screens = [
         top=bar.Bar(
             [
                 widget.CurrentLayout(background=black),
-                widget.GroupBox(highlight_method='line', background=black),
-                widget.Spacer(length=bar.STRETCH),
+                widget.GroupBox(highlight_method='line', background=black, highlight_color=active),
+                widget.Spacer(length=bar.STRETCH, bagkground=black),
                 widget.Clock(format=" ~   %a %m/%d  %I:%M %p   ~ ", background=black),
-                widget.Spacer(length=bar.STRETCH),
+                widget.Spacer(length=bar.STRETCH, bagkground=black),
                 widget.Battery(format=' Bat1: {percent:2.0%}', update_interval=5, battery=1, background=black),
                 widget.Battery(format='Bat2: {percent:2.0%} ', update_interval=5, battery=2, background=black),
             ],
             45,
-            background=transparent,
-            margin=[0,0,0,0]
+            background=black,
+            margin=[5,5,5,5]
         ),
     ),
 ]
@@ -171,7 +173,7 @@ dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(
+floating_layout = layout.Floating(border_focus=active,border_normal=inactive,border_width=4,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -192,4 +194,4 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
-wmname = "LG3D"
+wmname = "Qtile"
